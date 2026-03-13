@@ -4,7 +4,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 
 MLX_DIR = mlx
-LIBFT_DIR = lib
+LIBFT_DIR = libft
 
 LIBFT = $(LIBFT_DIR)/libft.a
 MLX_LIB = $(MLX_DIR)/libmlx.a
@@ -12,7 +12,7 @@ MLX_LIB = $(MLX_DIR)/libmlx.a
 INCLUDES = -I/opt/X11/include -Imlx -Iinclude
 MLX_FLAGS = -Lmlx -lmlx -lXext -lX11
 
-SRC = ./src/ft_check_map.c ./src/ft_init_utils.c ./src/init_game.c ./src/init_map.c ./src/main.c ./src/ft_moving.c ./src/ft_moving_player.c ./src/ft_check_fill_map.c ./src/check_utils.c ./src/ft_exit.c ./src/ft_map_hight.c ./src/ft_parse_map.c
+SRC = ./srcs/main.c
 
 all: ${NAME}
 
