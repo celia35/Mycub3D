@@ -1,36 +1,119 @@
 #include "cub3d.h"
 
-
-static void	free_window(t_game *data)
+void	
+ft_parse_map(t_game *data)
 {
-	if (data->win)
+	int	img_hight;
+	int	img_width;
+
+	data->image = malloc(sizeof(t_img));
+	if (!data->image)
 	{
-		mlx_clear_window(data->mlx, data->win);
-		mlx_destroy_window(data->mlx, data->win);
+    	ft_printf("Erreur allocation image\n");
+    	exit(EXIT_FAILURE);
+	}
+
+	data->image->player = mlx_xpm_file_to_image(data->mlx, PLAYER, &img_width, &img_hight);
+	if (!data->image->player)
+	{
+    	ft_printf("Erreur chargement image PLAYER: %s\n", PLAYER);
+    	exit(EXIT_FAILURE);
+	}
+	data->image->wall = mlx_xpm_file_to_image(data->mlx, WALL, &img_width, &img_hight);
+	if (!data->image->wall)
+	{
+    	ft_printf("Erreur chargement image WALL: %s\n", WALL);
+    	exit(EXIT_FAILURE);
+	}
+	data->image->empty = mlx_xpm_file_to_image(data->mlx,
+			EMPTY, &img_width, &img_hight);
+	if (!data->image->empty)
+	{
+		ft_printf("Erreur chargement image EMPTY: %s\n", EMPTY);
+		exit(EXIT_FAILURE);
+	}
+	data->image->exit = mlx_xpm_file_to_image(data->mlx,
+			EXIT, &img_width, &img_hight);
+	if (!data->image->exit)
+	{
+		ft_printf("Erreur chargement image EXIT: %s\n", EXIT);
+		exit(EXIT_FAILURE);
+	}
+	data->image->collect = mlx_xpm_file_to_image(data->mlx,
+			COLLECT, &img_width, &img_hight);
+	if (!data->image->collect)
+	{
+		ft_printf("Erreur chargement image COLLECT: %s\n", COLLECT);
+		exit(EXIT_FAILURE);
+	}
+	data->image->winner = mlx_xpm_file_to_image(data->mlx,
+			WIN, &img_width, &img_hight);
+	if (!data->image->winner)
+	{
+		ft_printf("Erreur chargement image WINNER: %s\n", WIN);
+		exit(EXIT_FAILURE);
 	}
 }
 
-int main()
+// static void	free_window(t_game *data)
+// {
+// 	if (data->win)
+// 	{
+// 		mlx_clear_window(data->mlx, data->win);
+// 		mlx_destroy_window(data->mlx, data->win);
+// 	}
+// }
+
+void	ft_map_data(t_game *data, char *name)
+{
+	data->height = 0;
+	data->width = 0;
+	// data->escape = 0;
+	// data->count = 0;
+	// data->step = 0;
+	data->playerX = 0;
+	data->playerY = 0;
+	data->player = 0;
+	data->fn = name;
+	ft_parse_map(data);
+}
+
+
+
+int main(int ac, char **av)
 {
 	t_game game;
 
-	game.planeX = 22;
-	game.playerY = 12;
-	game.dirX = -1;
-	game.dirY = 0;
-	game.planeX = 0;
-	game.planeY = 0.66;
+	// game.planeX = 22;
+	// game.playerY = 12;
+	// game.dirX = -1;
+	// game.dirY = 0;
+	// game.planeX = 0;
+	// game.planeY = 0.66;
 
-	//if (ac == 2 && av)
-	//{
+	if (ac == 2 && av)
+	{
 		game.mlx = mlx_init();
 		//game.win = mlx_new_window(game.mlx, game.width * 40, game.height * 40, "cub3D");
-		game.win = mlx_new_window(game.mlx, 640, 480, "cub3D");
+		ft_map_data(&game, av[1]);
+		ft_map_height(&game);
+		ft_read_map(&game);
+		// game.win = mlx_new_window(game.mlx, 640, 480, "cub3D");
+		ft_printf("height %d/n", game.height);
+		ft_printf("width %d/n", game.width);
+		game.win = mlx_new_window(game.mlx, game.width * 40, game.height * 40, "cub3D");
+		if (!game.win)
+		{
+			ft_printf("Error: Failed to create window");
+		}
+		ft_create_map(&game);
+		mlx_hook(game.win, 17, 0, ft_exit, &game);
+		mlx_key_hook(game.win, press_key, &game);
 		mlx_loop(game.mlx);
-		free_window(&game);
+		// free_window(&game);
 		//free_display(game);
-		exit(EXIT_SUCCESS);
-		return (0);
-	//}
+		// exit(EXIT_SUCCESS);
+		// return (0);
+	}
 }
 
