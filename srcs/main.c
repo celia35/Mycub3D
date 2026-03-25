@@ -84,12 +84,14 @@ int main(int ac, char **av)
 {
 	t_game game;
 
-	// game.planeX = 22;
+	// game.playerX = 22;
 	// game.playerY = 12;
-	// game.dirX = -1;
-	// game.dirY = 0;
-	// game.planeX = 0;
-	// game.planeY = 0.66;
+
+	game.dirX = -1;
+	game.dirY = 0;
+
+	game.planeX = 0;
+	game.planeY = 0.66;
 
 	if (ac == 2 && av)
 	{

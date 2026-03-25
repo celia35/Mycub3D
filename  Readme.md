@@ -21,4 +21,10 @@ Ecept for the map, each element must begin with its type identifier, followed by
 
 **Resources**
 
+!!
+Est ce que toute les variables initiées dans init_game pour le raycasting sont necessaires ? et doivent etre toutes misent dans la structs?
+si oui comment optimiser?
+respecter norme?
+==> bien checker si toute les varibales sont bien initialisées au bon endroits et accsesible 
+
 

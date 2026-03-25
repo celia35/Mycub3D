@@ -5,6 +5,9 @@
 #define X_EVENT_KEY_RELEASE 3
 #define X_EVENT_KEY_EXIT 17
 
+#define SCREEN_WIDTH 640
+#define SCREEN_HEIGHT 480
+
 # define WALL		"./img/wall.xpm"
 # define EMPTY		"./img/floor.xpm"
 # define PLAYER		"./img/player-copie.xpm"
@@ -26,6 +29,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include <math.h>
 
 typedef struct s_img{
 	void	*mlx_img;
@@ -63,13 +67,22 @@ typedef struct s_data{
 	double	planeX;
 	double	planeY;
 
+	double rayDirX;
+	double rayDirY;
+
+	double sideDistX;
+	double sideDistY;
+
 	char	**map;
+	int		mapX;
+	int		mapY;
 
 	int		on_exit;
 
 	int		player;
 
 	t_img	*image;
+	t_mlx	*mlx;
 }t_game;
 
 typedef struct s_window
