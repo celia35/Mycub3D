@@ -5,8 +5,14 @@
 #define X_EVENT_KEY_RELEASE 3
 #define X_EVENT_KEY_EXIT 17
 
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 480
+#define SCREEN_WIDTH 800 //640
+#define SCREEN_HEIGHT 600 //480
+
+#define RED		0x00FF0000
+#define GREEN	0x0000FF00
+#define BLUE 	0x000000FF
+#define WHITE	0x00FFFFFF
+#define YELLOW	0x00FFFF00
 
 # define WALL		"./img/wall.xpm"
 # define EMPTY		"./img/floor.xpm"
@@ -64,6 +70,14 @@ typedef struct s_data{
 	int		dirX;
 	int		dirY;
 
+	int		stepX;
+	int		stepY;
+
+	double	deltaDistX;
+	double	deltaDistY;
+
+	double	perpWallDist;
+
 	double	planeX;
 	double	planeY;
 
@@ -72,6 +86,9 @@ typedef struct s_data{
 
 	double sideDistX;
 	double sideDistY;
+
+	//for camera
+	int		side;
 
 	char	**map;
 	int		mapX;

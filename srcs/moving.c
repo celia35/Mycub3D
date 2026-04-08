@@ -83,3 +83,113 @@ int	press_key(int keycode, t_game *data)
 
 	return (0);
 }
+
+void		create_mov(t_game *game)
+{
+	int hit;
+	int side;
+
+	hit = 0;
+
+	double sideDistX;
+	double sideDistY;
+
+	double deltaDistX;
+	double deltaDistY;
+
+	int mapX;
+	int mapY;
+
+	int stepX;
+	int stepY;
+	
+	//perform DDA
+	while (hit == 0)
+	{
+		//jump to n=next map square, either in x-direction, or in y-direction
+		if (sideDistX < sideDistY)
+		{
+			sideDistX += deltaDistX;
+			mapX += stepX;
+			side = 0;
+		}
+		else
+		{
+			sideDistY += deltaDistY;
+			mapY += stepY;
+			side = 1;
+		}
+		//Check if ray has hit a wall
+		if (game->map[mapX][mapY] > 0)
+			hit = 1;
+	}
+}
+
+void	camera_dir(t_game *game)
+{
+	if (game->side == 0)
+		game->perpWallDist = (game->sideDistX - game->deltaDistX);
+	else
+		game->perpWallDist = (game->sideDistY - game->deltaDistX);
+}
+void	ver_line(t_game *game, t_mlx *mlx, int x, int draw_start, int draw_end, int color)
+{
+	int y;
+
+	y = draw_start;
+	while(y <= draw_end)
+	{
+		my_pixel_put(mlx->mlx, mlx->win, x, y, color);
+		y++;
+	}
+}
+
+void	camera_init(t_game *game, t_mlx *mlx)
+{
+	int drawStart;
+	int drawEnd;
+	int lineHeight;
+	int color;
+	int h;
+
+	//h = game->mapY + (1 - game->stepY) / 2;
+	h = SCREEN_HEIGHT; // hauteur de l'écran, 
+
+	//hauteur de la ligne a dessiner
+	lineHeight = (int) (h / game->perpWallDist);
+
+	//Pixel le plus bas et le plus haut
+	drawStart = -lineHeight / 2 + h / 2;
+	if (drawStart < 0) 
+		drawStart = 0;
+
+	drawEnd = lineHeight / 2 + h / 2;
+	if (drawEnd >= h)
+		drawEnd = h - 1;
+	
+	//choose wall color
+      //ColorRGB color;
+      switch(game->map[game->mapX][game->mapY])
+      {
+        case 1:  color = 0x00FF0000;  break; //red
+        case 2:  color = 0x0000FF00;  break; //green
+        case 3:  color = 0x000000FF;   break; //blue
+        case 4:  color = 0x00FFFFFF;  break; //white
+        default: color = 0x00FFFF00; break; //yellow
+      }
+
+      //give x and y sides different brightness => assombrir les faces Nord/Sud
+      if (game->side == 1) 
+	  {
+		
+		color =((color >> 1) & 0x007F7F7F); //divise R, G, B par 2
+	  }
+
+      //Dessiner la ligne verticale
+      verLine(mlx->x, drawStart, drawEnd, color);
+}
+
+void	camera_rotate(t_game *game)
+{
+	
+}
