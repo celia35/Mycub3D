@@ -57,7 +57,7 @@ typedef struct s_mlx{
 }t_mlx;
 
 typedef struct s_data{
-	void	*mlx;
+	//void	*mlx;
 	void	*win;
 	int		width;
 	int		height;
@@ -86,6 +86,16 @@ typedef struct s_data{
 
 	double sideDistX;
 	double sideDistY;
+
+	double  posX;
+	double  posY;
+	//double  dirX;
+	//double  dirY;
+	//double  planeX;
+	//double  planeY;
+	double  frameTime;
+	long    time;
+	long    oldTime;
 
 	//for camera
 	int		side;

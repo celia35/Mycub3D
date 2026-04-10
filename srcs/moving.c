@@ -59,30 +59,89 @@ void	move_d(t_game *data)
 }
 
 
-int	press_key(int keycode, t_game *data)
+// int	press_key(int keycode, t_game *data)
+// {
+// 	ft_printf("Touche pressée : %d\n", keycode);
+// 	if (keycode == ESC)
+// 		ft_exit(data);
+// 	else if (keycode == Q)
+// 		ft_exit(data);
+// 	else if (keycode == W)
+// 		move_w(data);
+// 	else if (keycode == A)
+// 		move_a(data);
+// 	else if (keycode == S)
+// 		move_s(data);
+// 	else if (keycode == D)
+// 		move_d(data);
+
+// 	mlx_clear_window(data->mlx, data->win); 
+// 	// ft_create_map(data);                    
+
+// 	// if (data->count == 0 && data->on_exit == 1)
+// 	// 	ft_game_result(data);
+
+// 	return (0);
+// }
+
+int press_key(int keycode, t_game *data)
 {
-	ft_printf("Touche pressée : %d\n", keycode);
-	if (keycode == ESC)
-		ft_exit(data);
-	else if (keycode == Q)
-		ft_exit(data);
-	else if (keycode == W)
-		move_w(data);
-	else if (keycode == A)
-		move_a(data);
-	else if (keycode == S)
-		move_s(data);
-	else if (keycode == D)
-		move_d(data);
+    double moveSpeed = data->frameTime * 5.0;
+    double rotSpeed  = data->frameTime * 3.0;
+    double oldDirX;
+    double oldPlaneX;
 
-	mlx_clear_window(data->mlx, data->win); 
-	// ft_create_map(data);                    
+    if (keycode == ESC || keycode == Q)
+        ft_exit(data);
 
-	// if (data->count == 0 && data->on_exit == 1)
-	// 	ft_game_result(data);
+    // Avancer
+    if (keycode == W)
+    {
+        if (data->map[(int)(data->posX + data->dirX * moveSpeed)][(int)(data->posY)] == 0)
+            data->posX += data->dirX * moveSpeed;
+        if (data->map[(int)(data->posX)][(int)(data->posY + data->dirY * moveSpeed)] == 0)
+            data->posY += data->dirY * moveSpeed;
+    }
+    // Reculer
+    if (keycode == S)
+    {
+        if (data->map[(int)(data->posX - data->dirX * moveSpeed)][(int)(data->posY)] == 0)
+            data->posX -= data->dirX * moveSpeed;
+        if (data->map[(int)(data->posX)][(int)(data->posY - data->dirY * moveSpeed)] == 0)
+            data->posY -= data->dirY * moveSpeed;
+    }
+    // Rotation droite
+    if (keycode == D)
+    {
+        oldDirX = data->dirX;
+        data->dirX   = data->dirX * cos(-rotSpeed) - data->dirY * sin(-rotSpeed);
+        data->dirY   = oldDirX    * sin(-rotSpeed) + data->dirY * cos(-rotSpeed);
+        oldPlaneX = data->planeX;
+        data->planeX = data->planeX * cos(-rotSpeed) - data->planeY * sin(-rotSpeed);
+        data->planeY = oldPlaneX   * sin(-rotSpeed) + data->planeY * cos(-rotSpeed);
+    }
+    // Rotation gauche
+    if (keycode == A)
+    {
+        oldDirX = data->dirX;
+        data->dirX   = data->dirX * cos(rotSpeed) - data->dirY * sin(rotSpeed);
+        data->dirY   = oldDirX   * sin(rotSpeed) + data->dirY * cos(rotSpeed);
+        oldPlaneX = data->planeX;
+        data->planeX = data->planeX * cos(rotSpeed) - data->planeY * sin(rotSpeed);
+        data->planeY = oldPlaneX   * sin(rotSpeed) + data->planeY * cos(rotSpeed);
+    }
 
-	return (0);
+    mlx_clear_window(data->mlx, data->win);
+    return (0);
 }
+void    update_time(t_game *data)
+{
+    data->oldTime   = data->time;
+    data->time      = get_ticks(); // ton équivalent de getTicks()
+    data->frameTime = (data->time - data->oldTime) / 1000.0;
+    ft_printf("FPS: %f\n", 1.0 / data->frameTime);
+}
+
 
 void		create_mov(t_game *game)
 {
