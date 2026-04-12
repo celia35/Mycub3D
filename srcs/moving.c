@@ -1,11 +1,5 @@
 # include "cub3d.h"
 
-int	ft_exit(t_game *data)
-{
-	(void) *data;
-	exit(EXIT_SUCCESS);
-}
-
 void	move_player(t_game *data, int new_x, int new_y)
 {
 	char next_tile = data->map[new_y][new_x];
@@ -59,130 +53,136 @@ void	move_d(t_game *data)
 }
 
 
-// int	press_key(int keycode, t_game *data)
-// {
-// 	ft_printf("Touche pressée : %d\n", keycode);
-// 	if (keycode == ESC)
-// 		ft_exit(data);
-// 	else if (keycode == Q)
-// 		ft_exit(data);
-// 	else if (keycode == W)
-// 		move_w(data);
-// 	else if (keycode == A)
-// 		move_a(data);
-// 	else if (keycode == S)
-// 		move_s(data);
-// 	else if (keycode == D)
-// 		move_d(data);
-
-// 	mlx_clear_window(data->mlx, data->win); 
-// 	// ft_create_map(data);                    
-
-// 	// if (data->count == 0 && data->on_exit == 1)
-// 	// 	ft_game_result(data);
-
-// 	return (0);
-// }
-
-int press_key(int keycode, t_game *data)
+int	press_key(int keycode, t_game *data)
 {
-    double moveSpeed = data->frameTime * 5.0;
-    double rotSpeed  = data->frameTime * 3.0;
-    double oldDirX;
-    double oldPlaneX;
+	ft_printf("Touche pressée : %d\n", keycode);
+	if (keycode == ESC)
+		ft_exit(data);
+	else if (keycode == Q)
+		ft_exit(data);
+	else if (keycode == W)
+		move_w(data);
+	else if (keycode == A)
+		move_a(data);
+	else if (keycode == S)
+		move_s(data);
+	else if (keycode == D)
+		move_d(data);
 
-    if (keycode == ESC || keycode == Q)
-        ft_exit(data);
+	mlx_clear_window(data->mlx, data->win); 
+	// ft_create_map(data);                    
 
-    // Avancer
-    if (keycode == W)
-    {
-        if (data->map[(int)(data->posX + data->dirX * moveSpeed)][(int)(data->posY)] == 0)
-            data->posX += data->dirX * moveSpeed;
-        if (data->map[(int)(data->posX)][(int)(data->posY + data->dirY * moveSpeed)] == 0)
-            data->posY += data->dirY * moveSpeed;
-    }
-    // Reculer
-    if (keycode == S)
-    {
-        if (data->map[(int)(data->posX - data->dirX * moveSpeed)][(int)(data->posY)] == 0)
-            data->posX -= data->dirX * moveSpeed;
-        if (data->map[(int)(data->posX)][(int)(data->posY - data->dirY * moveSpeed)] == 0)
-            data->posY -= data->dirY * moveSpeed;
-    }
-    // Rotation droite
-    if (keycode == D)
-    {
-        oldDirX = data->dirX;
-        data->dirX   = data->dirX * cos(-rotSpeed) - data->dirY * sin(-rotSpeed);
-        data->dirY   = oldDirX    * sin(-rotSpeed) + data->dirY * cos(-rotSpeed);
-        oldPlaneX = data->planeX;
-        data->planeX = data->planeX * cos(-rotSpeed) - data->planeY * sin(-rotSpeed);
-        data->planeY = oldPlaneX   * sin(-rotSpeed) + data->planeY * cos(-rotSpeed);
-    }
-    // Rotation gauche
-    if (keycode == A)
-    {
-        oldDirX = data->dirX;
-        data->dirX   = data->dirX * cos(rotSpeed) - data->dirY * sin(rotSpeed);
-        data->dirY   = oldDirX   * sin(rotSpeed) + data->dirY * cos(rotSpeed);
-        oldPlaneX = data->planeX;
-        data->planeX = data->planeX * cos(rotSpeed) - data->planeY * sin(rotSpeed);
-        data->planeY = oldPlaneX   * sin(rotSpeed) + data->planeY * cos(rotSpeed);
-    }
+	// if (data->count == 0 && data->on_exit == 1)
+	// 	ft_game_result(data);
 
-    mlx_clear_window(data->mlx, data->win);
-    return (0);
+	return (0);
 }
+
+// int press_key(int keycode, t_game *data)
+// {
+//     double moveSpeed = data->frameTime * 5.0;
+//     double rotSpeed  = data->frameTime * 3.0;
+//     double oldDirX;
+//     double oldPlaneX;
+
+//     if (keycode == ESC || keycode == Q)
+//         ft_exit(data);
+
+//     // Avancer
+//     if (keycode == W)
+//     {
+//         if (data->map[(int)(data->posX + data->dirX * moveSpeed)][(int)(data->posY)] == 0)
+//             data->posX += data->dirX * moveSpeed;
+//         if (data->map[(int)(data->posX)][(int)(data->posY + data->dirY * moveSpeed)] == 0)
+//             data->posY += data->dirY * moveSpeed;
+//     }
+//     // Reculer
+//     if (keycode == S)
+//     {
+//         if (data->map[(int)(data->posX - data->dirX * moveSpeed)][(int)(data->posY)] == 0)
+//             data->posX -= data->dirX * moveSpeed;
+//         if (data->map[(int)(data->posX)][(int)(data->posY - data->dirY * moveSpeed)] == 0)
+//             data->posY -= data->dirY * moveSpeed;
+//     }
+//     // Rotation droite
+//     if (keycode == D)
+//     {
+//         oldDirX = data->dirX;
+//         data->dirX   = data->dirX * cos(-rotSpeed) - data->dirY * sin(-rotSpeed);
+//         data->dirY   = oldDirX    * sin(-rotSpeed) + data->dirY * cos(-rotSpeed);
+//         oldPlaneX = data->planeX;
+//         data->planeX = data->planeX * cos(-rotSpeed) - data->planeY * sin(-rotSpeed);
+//         data->planeY = oldPlaneX   * sin(-rotSpeed) + data->planeY * cos(-rotSpeed);
+//     }
+//     // Rotation gauche
+//     if (keycode == A)
+//     {
+//         oldDirX = data->dirX;
+//         data->dirX   = data->dirX * cos(rotSpeed) - data->dirY * sin(rotSpeed);
+//         data->dirY   = oldDirX   * sin(rotSpeed) + data->dirY * cos(rotSpeed);
+//         oldPlaneX = data->planeX;
+//         data->planeX = data->planeX * cos(rotSpeed) - data->planeY * sin(rotSpeed);
+//         data->planeY = oldPlaneX   * sin(rotSpeed) + data->planeY * cos(rotSpeed);
+//     }
+
+//     mlx_clear_window(data->mlx, data->win);
+//     return (0);
+// }
 void    update_time(t_game *data)
 {
     data->oldTime   = data->time;
-    data->time      = get_ticks(); // ton équivalent de getTicks()
+    //data->time      = get_ticks(); // ton équivalent de getTicks()
     data->frameTime = (data->time - data->oldTime) / 1000.0;
     ft_printf("FPS: %f\n", 1.0 / data->frameTime);
 }
 
 
-void		create_mov(t_game *game)
-{
-	int hit;
-	int side;
+// void		create_mov(t_game *game)
+// {
+// 	int hit;
+// 	int side;
 
-	hit = 0;
+// 	hit = 0;
 
-	double sideDistX;
-	double sideDistY;
+// 	double sideDistX;
+// 	double sideDistY;
 
-	double deltaDistX;
-	double deltaDistY;
+// 	sideDistX = 0;
+// 	sideDistY = 0;
 
-	int mapX;
-	int mapY;
+// 	double deltaDistX;
+// 	double deltaDistY;
 
-	int stepX;
-	int stepY;
+// 	deltaDistX = 0;
+// 	deltaDistY = 0;
+
+// 	int mapX;
+// 	int mapY;
+
+// 	int stepX;
+// 	int stepY;
 	
-	//perform DDA
-	while (hit == 0)
-	{
-		//jump to n=next map square, either in x-direction, or in y-direction
-		if (sideDistX < sideDistY)
-		{
-			sideDistX += deltaDistX;
-			mapX += stepX;
-			side = 0;
-		}
-		else
-		{
-			sideDistY += deltaDistY;
-			mapY += stepY;
-			side = 1;
-		}
-		//Check if ray has hit a wall
-		if (game->map[mapX][mapY] > 0)
-			hit = 1;
-	}
-}
+// 	//perform DDA
+// 	while (hit == 0)
+// 	{
+// 		//jump to n=next map square, either in x-direction, or in y-direction
+// 		if (sideDistX < sideDistY)
+// 		{
+// 			sideDistX += deltaDistX;
+// 			game->mapX += stepX;
+// 			side = 0;
+// 		}
+// 		else
+// 		{
+// 			sideDistY += deltaDistY;
+// 			game->mapY += stepY;
+// 			side = 1;
+// 		}
+// 		//Check if ray has hit a wall
+// 		if (game->map[mapX][mapY] > 0)
+// 			hit = 1;
+// 	}
+// }
 
 void	camera_dir(t_game *game)
 {
@@ -191,64 +191,64 @@ void	camera_dir(t_game *game)
 	else
 		game->perpWallDist = (game->sideDistY - game->deltaDistX);
 }
-void	ver_line(t_game *game, t_mlx *mlx, int x, int draw_start, int draw_end, int color)
-{
-	int y;
+// void	ver_line(t_game *game, t_mlx *mlx, int x, int draw_start, int draw_end, int color)
+// {
+// 	int y;
 
-	y = draw_start;
-	while(y <= draw_end)
-	{
-		my_pixel_put(mlx->mlx, mlx->win, x, y, color);
-		y++;
-	}
-}
+// 	y = draw_start;
+// 	while(y <= draw_end)
+// 	{
+// 		my_pixel_put(mlx->mlx, mlx->win, x, y, color);
+// 		y++;
+// 	}
+// }
 
-void	camera_init(t_game *game, t_mlx *mlx)
-{
-	int drawStart;
-	int drawEnd;
-	int lineHeight;
-	int color;
-	int h;
+// void	camera_init(t_game *game, t_mlx *mlx)
+// {
+// 	int drawStart;
+// 	int drawEnd;
+// 	int lineHeight;
+// 	int color;
+// 	int h;
 
-	//h = game->mapY + (1 - game->stepY) / 2;
-	h = SCREEN_HEIGHT; // hauteur de l'écran, 
+// 	//h = game->mapY + (1 - game->stepY) / 2;
+// 	h = SCREEN_HEIGHT; // hauteur de l'écran, 
 
-	//hauteur de la ligne a dessiner
-	lineHeight = (int) (h / game->perpWallDist);
+// 	//hauteur de la ligne a dessiner
+// 	lineHeight = (int) (h / game->perpWallDist);
 
-	//Pixel le plus bas et le plus haut
-	drawStart = -lineHeight / 2 + h / 2;
-	if (drawStart < 0) 
-		drawStart = 0;
+// 	//Pixel le plus bas et le plus haut
+// 	drawStart = -lineHeight / 2 + h / 2;
+// 	if (drawStart < 0) 
+// 		drawStart = 0;
 
-	drawEnd = lineHeight / 2 + h / 2;
-	if (drawEnd >= h)
-		drawEnd = h - 1;
+// 	drawEnd = lineHeight / 2 + h / 2;
+// 	if (drawEnd >= h)
+// 		drawEnd = h - 1;
 	
-	//choose wall color
-      //ColorRGB color;
-      switch(game->map[game->mapX][game->mapY])
-      {
-        case 1:  color = 0x00FF0000;  break; //red
-        case 2:  color = 0x0000FF00;  break; //green
-        case 3:  color = 0x000000FF;   break; //blue
-        case 4:  color = 0x00FFFFFF;  break; //white
-        default: color = 0x00FFFF00; break; //yellow
-      }
+// 	//choose wall color
+//       //ColorRGB color;
+//       switch(game->map[game->mapX][game->mapY])
+//       {
+//         case 1:  color = 0x00FF0000;  break; //red
+//         case 2:  color = 0x0000FF00;  break; //green
+//         case 3:  color = 0x000000FF;   break; //blue
+//         case 4:  color = 0x00FFFFFF;  break; //white
+//         default: color = 0x00FFFF00; break; //yellow
+//       }
 
-      //give x and y sides different brightness => assombrir les faces Nord/Sud
-      if (game->side == 1) 
-	  {
+//       //give x and y sides different brightness => assombrir les faces Nord/Sud
+//       if (game->side == 1) 
+// 	  {
 		
-		color =((color >> 1) & 0x007F7F7F); //divise R, G, B par 2
-	  }
+// 		color =((color >> 1) & 0x007F7F7F); //divise R, G, B par 2
+// 	  }
 
-      //Dessiner la ligne verticale
-      verLine(mlx->x, drawStart, drawEnd, color);
-}
+//       //Dessiner la ligne verticale
+//       verLine(mlx->x, drawStart, drawEnd, color);
+// }
 
-void	camera_rotate(t_game *game)
-{
+// void	camera_rotate(t_game *game)
+// {
 	
-}
+// }

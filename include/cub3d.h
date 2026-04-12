@@ -150,6 +150,9 @@ void	ft_parse_map(t_game *data);
 void	ft_map_data(t_game *data, char *name);
 int		main(int ac, char **av);
 
+//parsing
+void	ft_check_format(t_game *game);
+
 
 #endif
 

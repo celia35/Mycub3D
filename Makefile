@@ -12,8 +12,8 @@ MLX_LIB = $(MLX_DIR)/libmlx.a
 INCLUDES = -I/opt/X11/include -Imlx -Iinclude
 MLX_FLAGS = -Lmlx -lmlx -lXext -lX11
 
-# SRC = ./srcs/main.c ./srcs/moving.c ./srcs/init_game.c ./srcs/init_map.c ./srcs/moving.c
-SRC = ./srcs/main.c ./srcs/moving.c
+# SRC = ./srcs/main.c ./srcs/moving.c ./srcs/init_game.c ./srcs/init_map.c
+SRC = ./srcs/main.c ./srcs/init_map.c ./srcs/init_game.c ./srcs/parsing1.c ./srcs/moving.c
 
 # ./srcs/main.c
 
