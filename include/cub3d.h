@@ -8,6 +8,16 @@
 #define SCREEN_WIDTH 800 //640
 #define SCREEN_HEIGHT 600 //480
 
+#define NO	1
+#define S0	2
+#define WE	3
+#define EA	4
+
+#define TEX_NO 0
+#define TEX_SO 1
+#define TEX_WE 2
+#define TEX_EA 3
+
 #define RED		0x00FF0000
 #define GREEN	0x0000FF00
 #define BLUE 	0x000000FF
