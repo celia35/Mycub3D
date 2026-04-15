@@ -8,6 +8,7 @@ void	ft_map_height(t_game *data)
 	fd = open(data->fn, O_RDONLY);
 	if (fd < 0)
 	{
+		ft_printf("je suis  dans fd < 0 \n");
 		ft_printf("Error opening file \n");
 		exit(EXIT_FAILURE);
 	}
