@@ -80,42 +80,83 @@ void	ft_map_data(t_game *data, char *name)
 
 
 
+// int main(int ac, char **av)
+// {
+// 	t_game game;
+
+// 	// game.playerX = 22;
+// 	// game.playerY = 12;
+
+// 	game.dirX = -1;
+// 	game.dirY = 0;
+
+// 	game.planeX = 0;
+// 	game.planeY = 0.66;
+
+// 	if (ac == 2 && av)
+// 	{
+// 		game.mlx = mlx_init();
+// 		//game.win = mlx_new_window(game.mlx, game.width * 40, game.height * 40, "cub3D");
+// 		ft_map_data(&game, av[1]);
+// 		ft_map_height(&game);
+// 		ft_read_map(&game);
+// 		// game.win = mlx_new_window(game.mlx, 640, 480, "cub3D");
+// 		ft_printf("height %d/n", game.height);
+// 		ft_printf("width %d/n", game.width);
+// 		game.win = mlx_new_window(game.mlx, game.width * 40, game.height * 40, "cub3D");
+// 		if (!game.win)
+// 		{
+// 			ft_printf("Error: Failed to create window");
+// 		}
+// 		ft_create_map(&game);
+// 		mlx_hook(game.win, 17, 0, ft_exit, &game);
+// 		mlx_key_hook(game.win, press_key, &game);
+// 		mlx_loop(game.mlx);
+// 		// free_window(&game);
+// 		//free_display(game);
+// 		// exit(EXIT_SUCCESS);
+// 		// return (0);
+// 	}
+// }
+
 int main(int ac, char **av)
 {
 	t_game game;
 
-	// game.playerX = 22;
-	// game.playerY = 12;
-
+	ft_memset(&game, 0, sizeof(t_game));
 	game.dirX = -1;
 	game.dirY = 0;
-
 	game.planeX = 0;
 	game.planeY = 0.66;
-
-	if (ac == 2 && av)
+	if (ac != 2 || !av[1])
 	{
-		game.mlx = mlx_init();
-		//game.win = mlx_new_window(game.mlx, game.width * 40, game.height * 40, "cub3D");
-		ft_map_data(&game, av[1]);
-		ft_map_height(&game);
-		ft_read_map(&game);
-		// game.win = mlx_new_window(game.mlx, 640, 480, "cub3D");
-		ft_printf("height %d/n", game.height);
-		ft_printf("width %d/n", game.width);
-		game.win = mlx_new_window(game.mlx, game.width * 40, game.height * 40, "cub3D");
-		if (!game.win)
-		{
-			ft_printf("Error: Failed to create window");
-		}
-		ft_create_map(&game);
-		mlx_hook(game.win, 17, 0, ft_exit, &game);
-		mlx_key_hook(game.win, press_key, &game);
-		mlx_loop(game.mlx);
-		// free_window(&game);
-		//free_display(game);
-		// exit(EXIT_SUCCESS);
-		// return (0);
+		ft_printf("Error\nUsage: ./cub3D <map.cub>\n");
+		return (1);
 	}
+	ft_map_data(&game, av[1]);
+	ft_map_height(&game);
+	ft_parse_identifiers(&game);
+	ft_read_map(&game);
+	ft_printf("height %d\n", game.height);
+	ft_printf("width %d\n", game.width);
+	ft_printf("NO: %s\n", game.conf.tex_no);
+	ft_printf("SO: %s\n", game.conf.tex_so);
+	ft_printf("WE: %s\n", game.conf.tex_we);
+	ft_printf("EA: %s\n", game.conf.tex_ea);
+	ft_printf("Floor: %d,%d,%d\n", game.conf.floor[0], game.conf.floor[1], game.conf.floor[2]);
+	ft_printf("Ceil:  %d,%d,%d\n", game.conf.ceil[0], game.conf.ceil[1], game.conf.ceil[2]);
+	game.mlx = mlx_init();
+	game.win = mlx_new_window(game.mlx, game.width * 40, game.height * 40, "cub3D");
+	if (!game.win)
+	{
+		ft_printf("Error: Failed to create window\n");
+		return (1);
+	}
+	ft_create_map(&game);
+	// mlx_hook(game.win, 17, 0, ft_exit, &game);
+	// mlx_hook(game.win, 17, 0, (int (*)(void))ft_exit, &game);
+	mlx_hook(game.win, 17, 0, (int (*)(void))(void *)ft_exit, &game);
+	mlx_key_hook(game.win, press_key, &game);
+	mlx_loop(game.mlx);
+	return (0);
 }
-

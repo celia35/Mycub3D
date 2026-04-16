@@ -66,11 +66,21 @@ typedef struct s_mlx{
 	char	str[3];
 }t_mlx;
 
+typedef	struct s_conf{
+	char	*tex_no;
+	char	*tex_so;
+	char	*tex_we;
+	char	*tex_ea;
+	int		floor[3];
+	int		ceil[3];
+	int		tex_parsed; //bitmask : 1=NO 2=SO 4=WE 8=EA 16=F 32=C
+}t_conf;
 typedef struct s_data{
 	//void	*mlx;
 	void	*win;
 	int		width;
 	int		height;
+	int		map_start;
 
 	char	*fn;
 	
@@ -118,6 +128,7 @@ typedef struct s_data{
 
 	int		player;
 
+	t_conf	conf;
 	t_img	*image;
 	t_mlx	*mlx;
 }t_game;
@@ -131,9 +142,8 @@ typedef struct s_window
 	int		height;
 }t_window;
 
-
 //moving
-int	ft_exit(t_game *data);
+int		ft_exit(void *param);
 void	move_player(t_game *data, int new_x, int new_y);
 
 void	move_w(t_game *data);
@@ -141,7 +151,7 @@ void	move_s(t_game *data);
 void	move_a(t_game *data);
 void	move_d(t_game *data);
 
-int	press_key(int keycode, t_game *data);
+int	press_key(int keycode, void *data);
 
 //init_game
 void	put_player_img(t_game *data, int *j, int *i);
@@ -162,6 +172,7 @@ int		main(int ac, char **av);
 
 //parsing
 void	ft_check_format(t_game *game);
+void    ft_parse_identifiers(t_game *data);
 
 
 #endif

@@ -53,8 +53,11 @@ void	move_d(t_game *data)
 }
 
 
-int	press_key(int keycode, t_game *data)
+int	press_key(int keycode, void *game)
 {
+	t_game *data;
+
+	data = (t_game *) game;
 	ft_printf("Touche pressée : %d\n", keycode);
 	if (keycode == ESC)
 		ft_exit(data);
