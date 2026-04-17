@@ -1,7 +1,7 @@
 #include "cub3d.h"
 
-void	
-ft_parse_map(t_game *data)
+
+void	ft_parse_map(t_game *data)
 {
 	int	img_hight;
 	int	img_width;
@@ -75,7 +75,7 @@ void	ft_map_data(t_game *data, char *name)
 	data->playerY = 0;
 	data->player = 0;
 	data->fn = name;
-	ft_parse_map(data);
+	// ft_parse_map(data);
 }
 
 
@@ -152,6 +152,7 @@ int main(int ac, char **av)
 		ft_printf("Error: Failed to create window\n");
 		return (1);
 	}
+	ft_parse_map(&game);
 	ft_create_map(&game);
 	// mlx_hook(game.win, 17, 0, ft_exit, &game);
 	// mlx_hook(game.win, 17, 0, (int (*)(void))ft_exit, &game);
