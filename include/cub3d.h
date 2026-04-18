@@ -87,8 +87,10 @@ typedef struct s_data{
 	int		playerX;
 	int		playerY;
 
-	int		dirX;
-	int		dirY;
+	char	spawn_dir; // N, S, E, W
+
+	double	dirX;
+	double	dirY;
 
 	int		stepX;
 	int		stepY;
@@ -174,6 +176,13 @@ int		main(int ac, char **av);
 void	ft_check_format(t_game *game);
 void    ft_parse_identifiers(t_game *data);
 
+void	ft_validate_map(t_game *data);
+void	ft_check_map(t_game *data);
+
+void	ft_init_player_dir(t_game *data);
+
+void	free_game(t_game *data);
+void	error_exit(char *msg, t_game *data);
 
 #endif
 

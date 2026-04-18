@@ -1,8 +1,17 @@
 # include "cub3d.h"
 
+// int	ft_exit(void *param)
+// {
+// 	(void)param;
+// 	exit(EXIT_SUCCESS);
+// }
+
 int	ft_exit(void *param)
 {
-	(void)param;
+	t_game	*data;
+
+	data = (t_game *)param;
+	free_game(data);
 	exit(EXIT_SUCCESS);
 }
 
