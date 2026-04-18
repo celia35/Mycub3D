@@ -1,0 +1,14 @@
+FAIRE CAAAA!!!!!
+
+
+// Avant
+ft_printf("Error: duplicate NO\n");
+exit(EXIT_FAILURE);
+
+// Après
+error_exit("duplicate NO", data);
+
+==> aller regarder exit.c
+
+Peut tester cette commande apres:
+make val MAP=test.cub
