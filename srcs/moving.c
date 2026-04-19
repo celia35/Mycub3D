@@ -1,5 +1,37 @@
 # include "cub3d.h"
 
+
+// void	ft_init_player_dir(t_game *data)
+// {
+// 	if (data->spawn_dir == 'N')
+// 	{
+// 		data->dirX = 0;
+// 		data->dirY = -1;
+// 		data->planeX = 0.66;
+// 		data->planeY = 0;
+// 	}
+// 	else if (data->spawn_dir == 'S')
+// 	{
+// 		data->dirX = 0;
+// 		data->dirY = 1;
+// 		data->planeX = -0.66;
+// 		data->planeY = 0;
+// 	}
+// 	else if (data->spawn_dir == 'E')
+// 	{
+// 		data->dirX = 1;
+// 		data->dirY = 0;
+// 		data->planeX = 0;
+// 		data->planeY = 0.66;
+// 	}
+// 	else if (data->spawn_dir == 'W')
+// 	{
+// 		data->dirX = -1;
+// 		data->dirY = 0;
+// 		data->planeX = 0;
+// 		data->planeY = -0.66;
+// 	}
+// }
 void	move_player(t_game *data, int new_x, int new_y)
 {
 	char next_tile = data->map[new_y][new_x];

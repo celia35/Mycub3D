@@ -1,6 +1,6 @@
 FAIRE CAAAA!!!!!
 
-
+DONE
 // Avant
 ft_printf("Error: duplicate NO\n");
 exit(EXIT_FAILURE);
@@ -12,3 +12,10 @@ error_exit("duplicate NO", data);
 
 Peut tester cette commande apres:
 make val MAP=test.cub
+
+DONE
+
+TO DO 
+	Refacto pars identifier
+	pixel img mlx
+

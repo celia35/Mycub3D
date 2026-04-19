@@ -63,8 +63,10 @@ LIBFT = $(LIBFT_DIR)/libft.a
 MLX_LIB = $(MLX_DIR)/libmlx.a
 INCLUDES = -I/opt/X11/include -Imlx -Iinclude
 MLX_FLAGS = -Lmlx -lmlx -lXext -lX11
-SRC = ./srcs/main.c ./srcs/init_game.c ./srcs/parsing1.c ./srcs/moving.c ./srcs/init_map.c
-# SRC = ./srcs/main.c ./srcs/init_game.c ./srcs/parsing1.c ./srcs/moving.c ./srcs/parsingIdent.c ./srcs/init_map.c
+SRC = ./srcs/main.c ./srcs/init_game.c ./srcs/moving.c \
+      ./srcs/init_map.c ./srcs/parsing_map.c \
+      ./srcs/parsing_identifiers.c ./srcs/exit.c
+# SRC = ./srcs/main.c ./srcs/init_game.c ./srcs/parsing1.c ./srcs/moving.c ./srcs/init_map.c
 
 all: ${BIN_DIR}/${NAME} cub
 
